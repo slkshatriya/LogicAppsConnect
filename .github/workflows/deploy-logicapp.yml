@@ -1,4 +1,4 @@
-name: Deploy Logic App
+name: Deploy Logic App Standard
 
 on:
 
@@ -14,36 +14,37 @@ jobs:
 
     steps:
 
-      - name: Checkout code
+    - name: Checkout code
 
-        uses: actions/checkout@v4
+      uses: actions/checkout@v4
 
-      - name: Ensure zip is available
+    - name: Ensure zip is available
 
-        run: sudo apt-get install -y zip
+      run: sudo apt-get install -y zip
 
-      - name: Create Logic App ZIP
+    - name: Create Logic App ZIP
 
-        run: |
+      run: |
 
-          zip -r logicapp.zip . -x "*.git*" "local.settings.json"
+        zip -r logicapp.zip . -x "*.git*" "local.settings.json"
 
-      - name: Azure Login
+    - name: Azure Login
 
-        uses: azure/login@v2
+      uses: azure/login@v2
 
-        with:
+      with:
 
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Deploy Logic App from code
+    - name: Deploy Logic App from code
 
-        run: |
+      run: |
 
-          az logicapp deployment source config-zip \
+        az logicapp deployment source config-zip \
 
-            --resource-group test \
+          --resource-group test \
 
-            --name DevOpsWorkflow \
+          --name DevOpsWorkflow \
 
-            --src logicapp.zip 
+          --src logicapp.zip
+ 
