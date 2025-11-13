@@ -1,2 +1,7 @@
 param($inputValue)
-Push-WorkflowOutput -Output "Value from HTTP: $inputValue"
+try {
+ Push-WorkflowOutput -Output "Input: $inputValue"
+}
+catch {
+ Push-WorkflowOutput -Output "Error: $($_.Exception.Message)"
+}
