@@ -1,0 +1,40 @@
+name: Deploy Logic App
+
+on:
+
+  push:
+
+    branches: [ main ]
+
+jobs:
+
+  build-and-deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout code
+
+        uses: actions/checkout@v4
+
+      - name: Azure Login
+
+        uses: azure/login@v2
+
+        with:
+
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy Logic App from code
+
+        run: |
+
+          az logicapp deployment source config-zip \
+
+            --resource-group test \
+
+            --name DevOpsWorkflow \
+
+            --src .
+ 
