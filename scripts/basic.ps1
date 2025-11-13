@@ -1,2 +1,2 @@
-$date = Get-Date 
-Write-Output "Congrats it worked at ${date}! 🎉🎉🎉"
+param($inputValue)
+Push-WorkflowOutput -Output "Value from HTTP: $inputValue"
