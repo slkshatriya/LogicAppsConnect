@@ -1,6 +1,6 @@
-param($inputValue)
+param($inputData)
 try {
- Push-WorkflowOutput -Output "Input: $inputValue"
+ Push-WorkflowOutput -Output "Input: $inputData"
 }
 catch {
  Push-WorkflowOutput -Output "Error: $($_.Exception.Message)"
